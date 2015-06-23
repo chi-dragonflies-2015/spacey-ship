@@ -1,0 +1,15 @@
+html {
+  background-color: black;
+}
+
+#black-hole {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 80px;
+  width: 80px;
+  margin-top: -40px;
+  margin-left: -40px;
+  border-radius: 1000px;
+  background-color: #009F99;
+}
