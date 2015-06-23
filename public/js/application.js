@@ -1,30 +1,84 @@
 var t = 0;
+var g = 0;
 
-function moveit() {
-    t += 0.05;
+function collision() {
+  $hole = $('#black-hole')
+  $ship = $('#ship')
 
-    shipRadius = $('#ship').width()/2;
+  var x1 = $ship.offset().left;
+  var y1 = $ship.offset().top;
+  var h1 = $ship.outerHeight(true);
+  var w1 = $ship.outerWidth(true);
+  var b1 = y1 + h1;
+  var r1 = x1 + w1;
+  var x2 = $hole.offset().left;
+  var y2 = $hole.offset().top;
+  var h2 = $hole.outerHeight(true);
+  var w2 = $hole.outerWidth(true);
+  var b2 = y2 + h2;
+  var r2 = x2 + w2;
 
-    var xCenter = $(window).width() / 2;   // center X position
-    var yCenter = $(window).height() / 2;   // center Y position
+  if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+  return true;
+}
 
-    var radius = yCenter * 0.75;
+function moveit(g) {
+  if (collision()) {
+    alert("Game Over!");
+    return;
+  }
+  t += 0.025;
+  g += 0.05;
 
-    if (yCenter > xCenter) {
-      radius = xCenter * 0.75;
-    }
+  shipSize = $('#ship').width();
 
-    var newLeft = Math.floor(xCenter - shipRadius + (radius * Math.cos(t)));
-    var newTop = Math.floor(yCenter - shipRadius + (radius * Math.sin(t)));
+  var xCenter = $(window).width() / 2 - shipSize;
+  var yCenter = $(window).height() / 2 - shipSize;
 
-    $('#ship').animate({
-        top: newTop,
-        left: newLeft,
-    }, 1, function() {
-        moveit();
-    });
+  var radius = yCenter * 0.75;
+
+  radius = radius - Math.pow(g,2)
+
+  if (yCenter > xCenter) {
+    radius = xCenter * 0.75;
+  }
+
+  var newLeft = Math.floor(xCenter + (radius * Math.cos(t)));
+  var newTop = Math.floor(yCenter  + (radius * Math.sin(t)));
+
+  $('#ship').animate({
+      top: newTop,
+      left: newLeft,
+  }, 1, function() {
+      moveit(g);
+  });
+}
+
+function collision() {
+  $hole = $('#black-hole')
+  $ship = $('#ship')
+
+  var x1 = $ship.offset().left;
+  var y1 = $ship.offset().top;
+  var h1 = $ship.outerHeight(true);
+  var w1 = $ship.outerWidth(true);
+  var b1 = y1 + h1;
+  var r1 = x1 + w1;
+  var x2 = $hole.offset().left;
+  var y2 = $hole.offset().top;
+  var h2 = $hole.outerHeight(true);
+  var w2 = $hole.outerWidth(true);
+  var b2 = y2 + h2;
+  var r2 = x2 + w2;
+
+  if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+  return true;
 }
 
 $(document).ready(function() {
-  moveit();
+  $('#start').on('click', function(event) {
+    event.preventDefault();
+    $(this).hide();
+    moveit(0);
+  });
 });
