@@ -23,8 +23,8 @@ function collision() {
 }
 
 function moveit(v) {
-  var G = 10;
-  var D = 0.06;
+  var G = 9.81;
+  var D = 0.1;
 
   if (collision()) {
     var orbits = Math.floor(angle / (Math.PI * 2));
@@ -32,7 +32,7 @@ function moveit(v) {
     return;
   }
 
-  angle += 0.06;
+  angle += 0.05;
 
   shipSize = $('#ship').width();
 
@@ -41,7 +41,7 @@ function moveit(v) {
 
   $(document).on('keyup', function(event) {
     if (event.keyCode == 32) {
-      v = -30;
+      v = -50;
     }
   });
 
