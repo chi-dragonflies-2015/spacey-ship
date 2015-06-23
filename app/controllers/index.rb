@@ -1,3 +1,7 @@
 get '/' do
-  erb :index
+  if activeSession?
+    erb :index
+  else
+    erb :_login
+  end
 end
