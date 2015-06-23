@@ -5,20 +5,20 @@ function collision() {
   $hole = $('#black-hole')
   $ship = $('#ship')
 
-  var x1 = $ship.offset().left;
-  var y1 = $ship.offset().top;
-  var h1 = $ship.outerHeight(true);
-  var w1 = $ship.outerWidth(true);
-  var b1 = y1 + h1;
-  var r1 = x1 + w1;
-  var x2 = $hole.offset().left;
-  var y2 = $hole.offset().top;
-  var h2 = $hole.outerHeight(true);
-  var w2 = $hole.outerWidth(true);
-  var b2 = y2 + h2;
-  var r2 = x2 + w2;
+  var holeRadius = $hole.outerHeight(false) / 2;
+  var shipRadius = $ship.outerHeight(false) / 2;
 
-  if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+  var holeX = $hole.offset().left + holeRadius;
+  var holeY = $hole.offset().top  + holeRadius;
+  var shipX = $ship.offset().left + shipRadius;
+  var shipY = $ship.offset().top  + shipRadius;
+
+  var distance = Math.sqrt(
+    Math.pow((holeX - shipX), 2) +
+    Math.pow((holeY - shipY), 2)
+  ) - holeRadius -  shipRadius;
+
+  if (distance >= 0) return false;
   return true;
 }
 
