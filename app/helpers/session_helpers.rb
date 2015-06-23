@@ -1,5 +1,5 @@
 helpers do
-  def activeSession?
+  def active_session?
     !!session[:user_id]
   end
 end
