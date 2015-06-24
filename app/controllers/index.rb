@@ -1,5 +1,5 @@
 get '/' do
-  if activeSession?
+  if active_session?
     erb :index
   else
     erb :_login

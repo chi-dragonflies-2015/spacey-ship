@@ -6,3 +6,6 @@ post '/users/login' do
     erb :_login
   end
 end
+
+delete '/' do
+end
