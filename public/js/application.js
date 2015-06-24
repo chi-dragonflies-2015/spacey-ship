@@ -1,34 +1,37 @@
-var angle = 0;
-var r = 0;
+function endGame(angle) {
+  var orbits = Math.floor(angle / (Math.PI * 2));
+  alert("Game Over! You completed " + orbits + " orbits!");
+  $('#start').show();
+  $('#ship').css({"top": "49%", "left" : "75%"});
+};
 
-function collision() {
-  $hole = $('#black-hole')
+function collision(obsticle) {
+  $obsticle = obsticle
   $ship = $('#ship')
 
-  var holeRadius = $hole.outerHeight(false) / 2;
+  var obsticleRadius = $obsticle.outerHeight(false) / 2;
   var shipRadius = $ship.outerHeight(false) / 2;
 
-  var holeX = $hole.offset().left + holeRadius;
-  var holeY = $hole.offset().top  + holeRadius;
+  var obsticleX = $obsticle.offset().left + obsticleRadius;
+  var obsticleY = $obsticle.offset().top  + obsticleRadius;
   var shipX = $ship.offset().left + shipRadius;
   var shipY = $ship.offset().top  + shipRadius;
 
   var distance = Math.sqrt(
-    Math.pow((holeX - shipX), 2) +
-    Math.pow((holeY - shipY), 2)
-  ) - holeRadius -  shipRadius;
+    Math.pow((obsticleX - shipX), 2) +
+    Math.pow((obsticleY - shipY), 2)
+  ) - obsticleRadius -  shipRadius;
 
-  if (distance >= 0) return false;
+  if (distance > 0) return false;
   return true;
-}
+};
 
-function moveit(v) {
+function moveit(angle, r, v) {
   var G = 9.81;
   var D = 0.1;
 
-  if (collision()) {
-    var orbits = Math.floor(angle / (Math.PI * 2));
-    alert("Game Over! You completed " + orbits + " orbits!");
+  if (collision($('#black-hole'))) {
+    endGame(angle)
     return;
   }
 
@@ -62,14 +65,14 @@ function moveit(v) {
       top: newTop,
       left: newLeft,
   }, 1, function() {
-      moveit(v);
+      moveit(angle, r, v);
   });
-}
+};
 
 $(document).ready(function() {
   $('#start').on('click', function(event) {
     event.preventDefault();
     $(this).hide();
-    moveit(0);
+    moveit(0, 0, 0);
   });
 });
