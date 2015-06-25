@@ -1,0 +1,3 @@
+<% User.all.sort_by {|user| -user.highscore}.each do |user| %>
+  <p><%= user.highscore %> - <%= user.username %></p>
+<% end %>
