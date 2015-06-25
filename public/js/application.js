@@ -70,8 +70,31 @@ function moveit(angle, r, v) {
 };
 
 $(document).ready(function() {
+  var urlData = {
+                  w: 1300,
+                  h: 800,
+                  angle: 90,
+                  ra: Math.random()*12 + 6,
+                  de: Math.random()*90 - 45,
+                  rotation: Math.random()*180 + 90,
+                  mag: 8,
+                  max_stars: Math.random()*2000 + 2000,
+                  zoom: 3,
+                  borders: 0,
+                  show_grid: 0,
+                  show_const_lines: 0,
+                  show_const_names: 0,
+                  show_const_boundaries: 0,
+                  output: 'PNG'
+  };
+
+  var backgroundURL = 'http://server1.sky-map.org/map?' + $.param(urlData);
+
+  $('html').css('background-image', 'url('+backgroundURL+')')
+
   $('#start').on('click', function(event) {
     event.preventDefault();
+    $('html').css('background-image', 'url('+backgroundURL+')')
     $(this).hide();
     moveit(0, 0, 0);
   });
