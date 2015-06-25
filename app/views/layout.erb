@@ -1,32 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--
-    normalize.css removes cross-browser differences in defaults, e.g.,
-    differences in how form elements appear between Firefox and IE
-    See: http://necolas.github.com/normalize.css/
-  -->
   <link rel="stylesheet" href="/css/normalize.css">
-  <!--
-    application.css is where you put your styles
-  -->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
   <link rel="stylesheet" href="/css/application.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
   <script src="/js/application.js"></script>
 
   <title></title>
 </head>
+
 <header>
-  <a id="leaders" href="">Leaderboard</a>
+  <a id="leaders" href="/users/show">Leaderboard</a>
   <% if active_session? %>
-    <a id="logout" href="logout">Logout</a>
+    <a id="logout" href="/logout">Logout</a>
   <% else %>
-    <a id="login" href="login">Login</a>
+    <a id="login" href="/users/login">Login</a>
     <span> | </span>
-    <a id="signup" href="signup">Sign Up</a>
+    <a id="signup" href="/users/new">Signup</a>
   <% end %>
 </header>
+
 <body>
   <%= yield %>
 </body>

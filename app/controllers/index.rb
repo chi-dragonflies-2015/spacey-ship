@@ -1,7 +1,11 @@
 get '/' do
   if active_session?
-    erb :index
+    erb :game
   else
-    erb :_login
+    erb :index
   end
+end
+
+get '/game' do
+  erb :game
 end
