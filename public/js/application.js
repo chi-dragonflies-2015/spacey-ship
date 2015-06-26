@@ -1,3 +1,7 @@
+function success(position) {
+  return position.coords.latitude;
+};
+
 function endGame(angle) {
   var orbits = Math.floor(angle / (Math.PI * 2));
   alert("Game Over! You completed " + orbits + " orbits!");
@@ -88,12 +92,31 @@ function moveit(angle, r, v) {
 };
 
 $(document).ready(function() {
+  // Calculate Right Ascension
+  var today = new Date();
+  var hour = today.getHours();
+  if (hour > 12) {
+    var ra = hour - 12;
+  } else {
+    var ra = hour + 12;
+  }
+
+  // Calculate Declination
+  var declination;
+  var startPos;
+  var geoSuccess = function(position) {
+    startPos = position;
+    declination = startPos.coords.latitude;
+    console.log(declination);
+  };
+  navigator.geolocation.getCurrentPosition(geoSuccess);
+
   var urlData = {
                   w: 1300,
                   h: 800,
                   angle: 90,
-                  ra: Math.random()*12 + 6,
-                  de: Math.random()*90 - 45,
+                  ra: ra,
+                  de: declination,
                   rotation: Math.random()*180 + 90,
                   mag: 8,
                   max_stars: Math.random()*2000 + 2000,
