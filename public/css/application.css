@@ -2,6 +2,10 @@ html {
   background-color: black;
 }
 
+form input[type=text], form input[type=password] {
+  color: white;
+}
+
 #black-hole {
   position: absolute;
   top: 50%;
