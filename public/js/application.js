@@ -45,8 +45,8 @@ function moveit(angle, r, v) {
 
   shipSize = $('#ship').width();
 
-  var xCenter = $(window).width() / 2 - shipSize;
-  var yCenter = $(window).height() / 2 - shipSize;
+  var xCenter = ($(window).width() - shipSize) / 2;
+  var yCenter = ($(window).height() - shipSize) / 2;
 
   $(document).on('keyup', function(event) {
     if (event.keyCode == 32) {
