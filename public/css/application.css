@@ -23,3 +23,11 @@ html {
   border-radius: 1000px;
   background-color: #AD2F00;
 }
+
+#outer-bound {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px dotted white;
+  border-radius: 10000px;
+}

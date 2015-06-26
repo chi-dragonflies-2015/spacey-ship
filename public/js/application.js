@@ -62,10 +62,22 @@ function moveit(angle, r, v) {
     radius = xCenter * 0.75;
   }
 
-  radius = radius - r;
+  $('#outer-bound').css({
+    'width' : radius*2 / 0.75,
+    'height' : radius*2 / 0.75,
+    'margin-top' : -(radius / 0.75),
+    'margin-left' : -(radius / 0.75)
+  });
 
-  var newLeft = Math.floor(xCenter + (radius * Math.cos(angle)));
-  var newTop = Math.floor(yCenter  + (radius * Math.sin(angle)));
+  newRadius = radius - r;
+
+  if (newRadius > radius / 0.75) {
+    endGame(angle);
+    return;
+  }
+
+  var newLeft = Math.floor(xCenter + (newRadius * Math.cos(angle)));
+  var newTop = Math.floor(yCenter  + (newRadius * Math.sin(angle)));
 
   $('#ship').animate({
       top: newTop,
