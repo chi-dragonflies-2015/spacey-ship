@@ -3,6 +3,12 @@ function endGame(angle) {
   alert("Game Over! You completed " + orbits + " orbits!");
   $('#start').show();
   $('#ship').css({"top": "49%", "left" : "75%"});
+
+  $.ajax({
+          url: '/games/new',
+          method: 'POST',
+          data: {score: orbits}
+  });
 };
 
 function collision(obsticle) {
@@ -31,7 +37,7 @@ function moveit(angle, r, v) {
   var D = 0.1;
 
   if (collision($('#black-hole'))) {
-    endGame(angle)
+    endGame(angle);
     return;
   }
 
