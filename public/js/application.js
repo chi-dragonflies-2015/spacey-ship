@@ -63,15 +63,15 @@ function moveit(angle, r, v) {
   }
 
   $('#outer-bound').css({
-    'width' : radius*2 / 0.75,
-    'height' : radius*2 / 0.75,
-    'margin-top' : -(radius / 0.75),
-    'margin-left' : -(radius / 0.75)
+    'width' : radius*2 / 0.9,
+    'height' : radius*2 / 0.9,
+    'margin-top' : -(radius / 0.9),
+    'margin-left' : -(radius / 0.9)
   });
 
   newRadius = radius - r;
 
-  if (newRadius > radius / 0.75) {
+  if (newRadius > radius / 0.9) {
     endGame(angle);
     return;
   }
